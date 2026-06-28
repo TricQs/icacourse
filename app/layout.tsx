@@ -45,6 +45,10 @@ export const metadata: Metadata = {
     description:
       "ICA Course menyediakan bimbingan belajar privat untuk SD, SMP, SMA, persiapan UTBK, CPNS, dan bahasa Inggris dengan tutor berpengalaman.",
   },
+  icons: {
+    icon: "/ica-logo.jpg",
+    apple: "/ica-logo.jpg",
+  },
 };
 
 export default function RootLayout({
