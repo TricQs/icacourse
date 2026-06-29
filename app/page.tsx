@@ -15,7 +15,7 @@ import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
 
 export default function Home() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [isDark, setIsDark] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<
     "snbt" | "reguler" | "tka" | "intl" | null
@@ -92,10 +92,9 @@ export default function Home() {
     };
   }, []);
 
-  // Disable body scroll when sidebar or any modal is open
+  // Disable body scroll when any modal is open
   useEffect(() => {
     const anyModalOpen =
-      sidebarOpen ||
       selectedProgram !== null ||
       panduanOpen ||
       selectedTestiImage !== null;
@@ -104,22 +103,28 @@ export default function Home() {
     } else {
       document.body.classList.remove("overflow-hidden");
     }
-  }, [sidebarOpen, selectedProgram, panduanOpen, selectedTestiImage]);
+  }, [selectedProgram, panduanOpen, selectedTestiImage]);
 
   return (
     <div className="bg-gray-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-full font-sans transition-colors duration-300 overflow-x-hidden">
       {/* Navigation */}
       <Navbar
-        toggleSidebar={() => setSidebarOpen(true)}
+        toggleSidebar={() => setSidebarExpanded((prev) => !prev)}
         isDark={isDark}
         toggleDark={toggleDark}
       />
 
-      {/* Sidebar Drawer */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* Desktop Sidebar (hidden on mobile) */}
+      <div className="hidden lg:block">
+        <Sidebar isExpanded={sidebarExpanded} onToggle={() => setSidebarExpanded((prev) => !prev)} />
+      </div>
 
       {/* Main Content sections matching HTML layout */}
-      <main className="flex-1 pt-20">
+      <main
+        className={`flex-1 pt-20 transition-all duration-300 ease-in-out ${
+          sidebarExpanded ? "lg:ml-64" : "lg:ml-16"
+        }`}
+      >
         <Hero />
         <Courses />
         <Stats />
