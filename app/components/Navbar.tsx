@@ -18,7 +18,7 @@ export default function Navbar({
       <div className="h-20 max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6">
         <button
           id="menu-toggle-btn"
-          className="hidden lg:flex hover:bg-white/10 p-2.5 rounded-xl transition-all duration-200 focus:outline-none min-w-[48px] min-h-[48px] items-center justify-center cursor-pointer"
+          className="flex lg:hidden hover:bg-white/10 p-2.5 rounded-xl transition-all duration-200 focus:outline-none min-w-[48px] min-h-[48px] items-center justify-center cursor-pointer"
           onClick={toggleSidebar}
           aria-label="Buka Menu"
         >
