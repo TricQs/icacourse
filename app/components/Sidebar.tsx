@@ -146,6 +146,7 @@ export default function Sidebar({ isOpen, onClose, isExpanded, onToggle }: Sideb
               isExpanded ? "w-full px-3 py-2.5" : "w-9 h-9 mx-auto"
             }`}
             aria-label={isExpanded ? "Persempit sidebar" : "Perluas sidebar"}
+            title={isExpanded ? "Tutup sidebar" : "Buka sidebar"}
           >
             <svg
               className={`w-5 h-5 transition-transform duration-300 ${isExpanded ? "" : "rotate-180"}`}
