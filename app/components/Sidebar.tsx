@@ -139,10 +139,12 @@ export default function Sidebar({ isOpen, onClose, isExpanded, onToggle }: Sideb
           isExpanded ? "w-64" : "w-16"
         }`}
       >
-        <div className="flex items-center h-14 px-3 border-b border-gray-200 dark:border-slate-700">
+        <div className="flex items-center h-14 px-2 border-b border-gray-200 dark:border-slate-700">
           <button
             onClick={onToggle}
-            className="w-9 h-9 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 flex items-center justify-center text-gray-500 dark:text-gray-400 transition-colors cursor-pointer mx-auto"
+            className={`rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 flex items-center justify-center text-gray-500 dark:text-gray-400 transition-colors cursor-pointer ${
+              isExpanded ? "w-full px-3 py-2.5" : "w-9 h-9 mx-auto"
+            }`}
             aria-label={isExpanded ? "Persempit sidebar" : "Perluas sidebar"}
           >
             <svg
