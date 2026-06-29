@@ -15,6 +15,7 @@ import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
 
 export default function Home() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [isDark, setIsDark] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<
@@ -92,9 +93,10 @@ export default function Home() {
     };
   }, []);
 
-  // Disable body scroll when any modal is open
+  // Disable body scroll when sidebar or any modal is open
   useEffect(() => {
     const anyModalOpen =
+      sidebarOpen ||
       selectedProgram !== null ||
       panduanOpen ||
       selectedTestiImage !== null;
@@ -103,21 +105,24 @@ export default function Home() {
     } else {
       document.body.classList.remove("overflow-hidden");
     }
-  }, [selectedProgram, panduanOpen, selectedTestiImage]);
+  }, [sidebarOpen, selectedProgram, panduanOpen, selectedTestiImage]);
 
   return (
     <div className="bg-gray-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-full font-sans transition-colors duration-300 overflow-x-hidden">
       {/* Navigation */}
       <Navbar
-        toggleSidebar={() => setSidebarExpanded((prev) => !prev)}
+        toggleSidebar={() => setSidebarOpen((prev) => !prev)}
         isDark={isDark}
         toggleDark={toggleDark}
       />
 
-      {/* Desktop Sidebar (hidden on mobile) */}
-      <div className="hidden lg:block">
-        <Sidebar isExpanded={sidebarExpanded} onToggle={() => setSidebarExpanded((prev) => !prev)} />
-      </div>
+      {/* Sidebar — mobile drawer + desktop collapsible */}
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        isExpanded={sidebarExpanded}
+        onToggle={() => setSidebarExpanded((prev) => !prev)}
+      />
 
       {/* Main Content sections matching HTML layout */}
       <main
