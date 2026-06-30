@@ -16,7 +16,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sidebarExpanded, setSidebarExpanded] = useState(true);
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<
     "snbt" | "reguler" | "tka" | "intl" | null
